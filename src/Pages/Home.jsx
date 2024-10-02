@@ -5,8 +5,10 @@ const Home = () => {
   
 
   return (
-    <div>
+    <div className='w-screen'>
       <Navbar/>
+      <h1>"Test Your Knowledge: Quizzes for Every Mind!"</h1>
+
     </div>
   )
 }

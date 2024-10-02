@@ -16,10 +16,10 @@ const Navbar = () => {
     setLoginProperty(!LoginProperty);
   }
   return (
-    <div>
-      <header>
+    <div className="flex items-center justify-center w-[100%]">
+      <header className="w-full flex items-center justify-around py-4">
         <img src="/logo.svg" alt="logo" />
-        <div>
+        <div className="flex gap-32">
           <Link to={"/"}>
             <button>Home</button>
           </Link>
