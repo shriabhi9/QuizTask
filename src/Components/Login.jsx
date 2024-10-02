@@ -3,12 +3,17 @@ import { useState } from "react";
 import axios from "axios";
 import { useLoginProperty } from "../Context/Login-context";
 import { useLoginShow } from "../Context/LoginShow-context";
+import { useLoginDoneProperty } from "../Context/DoneContext";
 
-const Login = ({ show, setShow }) => {
+
+const Login = ({ show, setShow}) => {
+  const {LoginDone, setLoginDone} = useLoginDoneProperty();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { LoginProperty, setLoginProperty } = useLoginProperty();
   const { LoginShow, setLoginShow } = useLoginShow();
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +27,7 @@ const Login = ({ show, setShow }) => {
       );
       localStorage.setItem("token", response.data.token);
       alert("Login successfully");
+      setLoginDone(!LoginDone);
       setLoginProperty(!LoginProperty);
       setLoginShow(!LoginShow);
     } catch (error) {
@@ -30,26 +36,30 @@ const Login = ({ show, setShow }) => {
   };
 
   return (
-    <div>
+    <div className="absolute right-24 mt-6 flex flex-col items-center gap-4 px-6 py-4 shadow-black shadow bg-white rounded-md">
       <h1>Admin Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
+          className="px-2 pt-2 rounded-md border-b-2 border-black"
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
+          className="px-2 pt-2 rounded-md border-b-2 border-black"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit" className="px-4 py-2 rounded-lg bg-black text-white">Login</button>
         
         <button
+        className="px-4 py-2 rounded-lg bg-black text-white"
           onClick={() => {
             setShow(!show);
+            setLoginDone(false);
           }}
         >
           SignUp

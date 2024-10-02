@@ -32,9 +32,9 @@ const Navbar = () => {
         </div>
         <div>
           {!LoginProperty ? (
-            <button onClick={LoginButtonHandler}>Login</button>
+            <button onClick={LoginButtonHandler} className="px-4 py-2 rounded-lg bg-black text-white">Login</button>
           ) : (
-            <button onClick={logoutButtonHandler}>Logout</button>
+            <button onClick={logoutButtonHandler} className="px-4 py-2 rounded-lg bg-black text-white">Logout</button>
           )}
           {LoginShow ? <Auth></Auth> : ""}
         </div>

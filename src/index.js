@@ -6,17 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { LoginProvider } from "./Context/Login-context";
 import { LoginShowProvider } from "./Context/LoginShow-context";
+import { DoneProvider } from "./Context/DoneContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <LoginProvider>
-      <LoginShowProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </LoginShowProvider>
-    </LoginProvider>
+    <DoneProvider>
+      <LoginProvider>
+        <LoginShowProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </LoginShowProvider>
+      </LoginProvider>
+    </DoneProvider>
   </React.StrictMode>
 );
 
