@@ -1,16 +1,26 @@
 // src/pages/Admin.jsx
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Admin = () => {
   const [quizzes, setQuizzes] = useState([]);
-  const [quiz, setQuiz] = useState({ title: '', description: '', questions: [] });
-  const [question, setQuestion] = useState({ questionText: '', options: '', correctAnswer: '' });
+  const [quiz, setQuiz] = useState({
+    title: "",
+    description: "",
+    questions: [],
+  });
+  const [question, setQuestion] = useState({
+    questionText: "",
+    options: "",
+    correctAnswer: "",
+  });
   const [editingQuizId, setEditingQuizId] = useState(null); // For editing existing quizzes
 
   // Function to fetch quizzes
   const fetchQuizzes = async () => {
-    const response = await axios.get('https://quizobackend.onrender.com/api/quiz');
+    const response = await axios.get(
+      "https://quizobackend.onrender.com/api/quiz"
+    );
     setQuizzes(response.data);
   };
 
@@ -21,41 +31,44 @@ const Admin = () => {
 
   const handleAddQuiz = async () => {
     if (quiz.questions.length < 5) {
-      alert('Each quiz must have at least 5 questions.');
+      alert("Each quiz must have at least 5 questions.");
       return;
     }
 
     if (editingQuizId) {
       // Update existing quiz
-      await axios.put(`https://quizobackend.onrender.com/api/quiz/${editingQuizId}`, quiz, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
+      await axios.put(
+        `https://quizobackend.onrender.com/api/quiz/${editingQuizId}`,
+        quiz,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       setEditingQuizId(null);
     } else {
       // Create new quiz
-      await axios.post('https://quizobackend.onrender.com/api/quiz', quiz, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      await axios.post("https://quizobackend.onrender.com/api/quiz", quiz, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
     }
 
     // Reset quiz state and refresh quizzes
-    setQuiz({ title: '', description: '', questions: [] });
-    setQuestion({ questionText: '', options: '', correctAnswer: '' });
+    setQuiz({ title: "", description: "", questions: [] });
+    setQuestion({ questionText: "", options: "", correctAnswer: "" });
     fetchQuizzes(); // Refresh the quizzes list
   };
 
   const handleDeleteQuiz = async (id) => {
     try {
       await axios.delete(`https://quizobackend.onrender.com/api/quiz/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setQuizzes(quizzes.filter((q) => q._id !== id));
     } catch (error) {
-      console.error('Error deleting quiz:', error.response.data); // Log the error response
-      alert('Error deleting quiz: ' + error.response.data.message); // Display the error message
+      console.error("Error deleting quiz:", error.response.data); // Log the error response
+      alert("Error deleting quiz: " + error.response.data.message); // Display the error message
     }
   };
-  
 
   const handleEditQuiz = (quizData) => {
     setQuiz(quizData);
@@ -63,12 +76,12 @@ const Admin = () => {
   };
 
   const handleAddQuestion = () => {
-    const optionsArray = question.options.split(',').map(opt => opt.trim()); // Convert string to array
+    const optionsArray = question.options.split(",").map((opt) => opt.trim()); // Convert string to array
     setQuiz({
       ...quiz,
       questions: [...quiz.questions, { ...question, options: optionsArray }],
     });
-    setQuestion({ questionText: '', options: '', correctAnswer: '' });
+    setQuestion({ questionText: "", options: "", correctAnswer: "" });
   };
 
   const handleDeleteQuestion = (index) => {
@@ -107,17 +120,23 @@ const Admin = () => {
             type="text"
             className="w-full p-2 border border-gray-300 rounded-lg"
             value={question.questionText}
-            onChange={(e) => setQuestion({ ...question, questionText: e.target.value })}
+            onChange={(e) =>
+              setQuestion({ ...question, questionText: e.target.value })
+            }
           />
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700">Options (comma separated)</label>
+          <label className="block text-gray-700">
+            Options (comma separated)
+          </label>
           <input
             type="text"
             className="w-full p-2 border border-gray-300 rounded-lg"
             value={question.options}
-            onChange={(e) => setQuestion({ ...question, options: e.target.value })}
+            onChange={(e) =>
+              setQuestion({ ...question, options: e.target.value })
+            }
           />
         </div>
 
@@ -127,7 +146,9 @@ const Admin = () => {
             type="text"
             className="w-full p-2 border border-gray-300 rounded-lg"
             value={question.correctAnswer}
-            onChange={(e) => setQuestion({ ...question, correctAnswer: e.target.value })}
+            onChange={(e) =>
+              setQuestion({ ...question, correctAnswer: e.target.value })
+            }
           />
         </div>
 
@@ -138,7 +159,7 @@ const Admin = () => {
         >
           Add Question
         </button>
-        
+
         {/* List of Questions */}
         {quiz.questions.length > 0 && (
           <div className="mt-4">
@@ -148,7 +169,7 @@ const Admin = () => {
                 <li key={index} className="mb-2">
                   <div className="mb-2">
                     <strong>{q.questionText}</strong> <br />
-                    <em>Options: {q.options.join(', ')}</em> <br />
+                    <em>Options: {q.options.join(", ")}</em> <br />
                     <em>Correct Answer: {q.correctAnswer}</em>
                   </div>
                   <button
@@ -168,7 +189,7 @@ const Admin = () => {
           onClick={handleAddQuiz}
           className="bg-green-500 text-white py-2 px-4 rounded-lg w-full mt-4"
         >
-          {editingQuizId ? 'Update Quiz' : 'Add Quiz'}
+          {editingQuizId ? "Update Quiz" : "Add Quiz"}
         </button>
       </form>
 
