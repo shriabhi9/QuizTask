@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../Components/Navbar";
+import { Navigate } from "react-router-dom";
 import { useLoginDoneProperty } from "../Context/DoneContext";
+import { useLoggedinProperty } from "../Context/LoginContext";
 
 const Admin = () => {
+  const { IsloggedIn, setIsLoggedIn } = useLoggedinProperty();
   const { LoginDone, setLoginDone } = useLoginDoneProperty();
   const [quizzes, setQuizzes] = useState([]); // Store all quizzes
   const [quiz, setQuiz] = useState({
@@ -82,6 +85,9 @@ const Admin = () => {
       console.error("Error deleting quiz", error);
     }
   };
+  if (!IsloggedIn) {
+    return <Navigate to="/login" />; // Redirect to login if not logged in
+  }
 
   return (
     <div className="flex flex-col items-center">
@@ -160,7 +166,7 @@ const Admin = () => {
 
           {/* Display List of Quizzes */}
           <h2 className="text-xl mt-10">Quizzes</h2>
-          <ul >
+          <ul>
             {quizzes.map((quiz) => (
               <li key={quiz._id} className="flex items-center gap-2 flex-col">
                 <strong>{quiz.title}</strong> - {quiz.description}

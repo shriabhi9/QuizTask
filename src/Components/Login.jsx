@@ -4,9 +4,11 @@ import axios from "axios";
 import { useLoginProperty } from "../Context/Login-context";
 import { useLoginShow } from "../Context/LoginShow-context";
 import { useLoginDoneProperty } from "../Context/DoneContext";
+import { useLoggedinProperty } from "../Context/LoginContext";
 
 
 const Login = ({ show, setShow}) => {
+  const {isLoggedIn, setIsLoggedIn} = useLoggedinProperty();
   const {LoginDone, setLoginDone} = useLoginDoneProperty();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +29,7 @@ const Login = ({ show, setShow}) => {
       );
       localStorage.setItem("token", response.data.token);
       alert("Login successfully");
+      setIsLoggedIn(true);
       setLoginDone(!LoginDone);
       setLoginProperty(!LoginProperty);
       setLoginShow(!LoginShow);
@@ -59,7 +62,6 @@ const Login = ({ show, setShow}) => {
         className="px-4 py-2 rounded-lg bg-black text-white"
           onClick={() => {
             setShow(!show);
-            setLoginDone(false);
           }}
         >
           SignUp

@@ -7,19 +7,22 @@ import { BrowserRouter } from "react-router-dom";
 import { LoginProvider } from "./Context/Login-context";
 import { LoginShowProvider } from "./Context/LoginShow-context";
 import { DoneProvider } from "./Context/DoneContext";
+import { LoggedinProvider } from "./Context/LoginContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <DoneProvider>
-      <LoginProvider>
-        <LoginShowProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </LoginShowProvider>
-      </LoginProvider>
-    </DoneProvider>
+    <LoggedinProvider>
+      <DoneProvider>
+        <LoginProvider>
+          <LoginShowProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </LoginShowProvider>
+        </LoginProvider>
+      </DoneProvider>
+    </LoggedinProvider>
   </React.StrictMode>
 );
 
