@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbars = () => {
   return (
     <nav className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between">
@@ -14,10 +14,10 @@ const Navbar = () => {
           <Link to="/signup" className="mx-2">Signup</Link>
           <Link to="/admin" className="mx-2">Admin</Link>
           <Link to="/quiz" className="mx-2">Quiz</Link>
-        </div>
+         </div>
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default Navbars;
