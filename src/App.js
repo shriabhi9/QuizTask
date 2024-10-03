@@ -1,20 +1,27 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
-import Admin from "./Pages/Admin";
-import QuizPage from "./Pages/QuizPage";
-import { useState } from "react";
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Admin from './pages/Admin';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Quiz from './pages/Quiz';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <div className="">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<Admin isLoggedIn={isLoggedIn}  setIsLoggedIn={setIsLoggedIn}/>} />
-        <Route path="/quiz" element={<QuizPage />} />
-      </Routes>
-    </div>
+    <Router>
+      <Navbar />
+      <div className="container mx-auto">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/quiz" element={<Quiz />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

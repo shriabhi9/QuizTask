@@ -1,28 +1,16 @@
-import React from "react";
-import Navbar from "../Components/Navbar";
-import { Link } from "react-router-dom";
+// src/pages/Home.jsx
+import React from 'react';
 
 const Home = () => {
   return (
-    <div className="w-screen flex flex-col items-center">
-      <Navbar />
-      <div className="flex flex-col items-center gap-4">
-        <h1 className="text-2xl pt-10 animate-bounce">
-          "Test Your Knowledge: Quizzes for Every Mind!"
-        </h1>
-        <p className="pt-4 px-40 text-center">
-          Welcome to the ultimate quiz platform, where learning meets fun!
-          Whether you're a trivia master or just looking to sharpen your
-          knowledge, explore quizzes across a variety of topics. From history to
-          pop culture, we have something for everyone. Log in now to create your
-          own quizzes, track your progress, and challenge your friends to see
-          who comes out on top!
-        </p>
-        <Link to={'/admin'}>
-          <button className="mt-10 px-4 py-2 rounded-lg bg-black text-white">
-            Get Started
-          </button>
-        </Link>
+    <div className="text-center my-10">
+      <h1 className="text-4xl font-bold">Welcome to the Quiz App!</h1>
+      <p className="mt-4 text-lg">
+        Test your knowledge with our wide range of quizzes. Sign up or log in to create and take quizzes!
+      </p>
+      <div className="mt-6">
+        <a href="/signup" className="bg-blue-500 text-white py-2 px-4 rounded-lg mr-4">Sign Up</a>
+        <a href="/login" className="bg-gray-500 text-white py-2 px-4 rounded-lg">Login</a>
       </div>
     </div>
   );

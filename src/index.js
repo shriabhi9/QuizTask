@@ -3,26 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
-import { LoginProvider } from "./Context/Login-context";
-import { LoginShowProvider } from "./Context/LoginShow-context";
-import { DoneProvider } from "./Context/DoneContext";
-import { LoggedinProvider } from "./Context/LoginContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <LoggedinProvider>
-      <DoneProvider>
-        <LoginProvider>
-          <LoginShowProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </LoginShowProvider>
-        </LoginProvider>
-      </DoneProvider>
-    </LoggedinProvider>
+    <App />
   </React.StrictMode>
 );
 
