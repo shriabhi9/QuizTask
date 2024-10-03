@@ -86,7 +86,7 @@ const Admin = () => {
     }
   };
   if (!IsloggedIn) {
-    return <Navigate to="/login" />; // Redirect to login if not logged in
+    return <h1>you must have logged in first</h1>; // Redirect to login if not logged in
   }
 
   return (
