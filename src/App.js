@@ -5,11 +5,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbars from './components/Navbars';
 import Home from './Pages/Home';
 import Admin from './Pages/Admin';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Quiz from './pages/Quiz';
+import Login from './Pages/Login';
+import Signup from './Pages/Signup';
+import Quiz from './Pages/Quiz';
+
 
 function App() {
+  
   return (
     <Router>
       <Navbars />
