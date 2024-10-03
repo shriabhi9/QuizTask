@@ -45,11 +45,17 @@ const Admin = () => {
   };
 
   const handleDeleteQuiz = async (id) => {
-    await axios.delete(`https://quizobackend.onrender.com/api/quiz/${id}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    });
-    setQuizzes(quizzes.filter((q) => q._id !== id));
+    try {
+      await axios.delete(`https://quizobackend.onrender.com/api/quiz/${id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      setQuizzes(quizzes.filter((q) => q._id !== id));
+    } catch (error) {
+      console.error('Error deleting quiz:', error.response.data); // Log the error response
+      alert('Error deleting quiz: ' + error.response.data.message); // Display the error message
+    }
   };
+  
 
   const handleEditQuiz = (quizData) => {
     setQuiz(quizData);
