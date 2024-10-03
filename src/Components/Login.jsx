@@ -29,7 +29,7 @@ const Login = ({ show, setShow}) => {
       );
       localStorage.setItem("token", response.data.token);
       alert("Login successfully");
-      setIsLoggedIn(true);
+      setIsLoggedIn(!isLoggedIn);
       setLoginDone(!LoginDone);
       setLoginProperty(!LoginProperty);
       setLoginShow(!LoginShow);
